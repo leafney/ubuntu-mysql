@@ -1,6 +1,6 @@
 Ubuntu-16.04 + Mysql-5.7
 
-#### ENVPOINT
+#### parameter
 
 * `MYSQL_ROOT_PWD` : root password   default "mysql"
 * `MYSQL_USER`  : new user

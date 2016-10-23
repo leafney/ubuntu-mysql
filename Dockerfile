@@ -24,10 +24,10 @@ RUN sed -i -e "$ a [client]\n\n[mysql]\n\n[mysqld]"  /etc/mysql/my.cnf && \
 
 VOLUME /var/lib/mysql
 
-COPY ./startup.sh /startup.sh
-RUN chmod +x /startup.sh
+COPY ./startup.sh /root/startup.sh
+RUN chmod +x /root/startup.sh
 
-ENTRYPOINT ["/startup.sh"]
+ENTRYPOINT ["/root/startup.sh"]
 
 EXPOSE 3306
 CMD ["/usr/bin/mysqld_safe"]
