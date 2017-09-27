@@ -1,6 +1,7 @@
 FROM ubuntu:latest
 MAINTAINER leafney "babycoolzx@126.com"
 
+RUN groupadd --gid 1000  -r mysql && useradd  --uid 1000 -r -g mysql mysql
 RUN echo "deb http://cn.archive.ubuntu.com/ubuntu/ xenial main restricted universe multiverse" >> /etc/apt/sources.list
 
 RUN echo "mysql-server mysql-server/root_password password root" | debconf-set-selections

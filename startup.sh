@@ -1,6 +1,8 @@
 #! /bin/bash
 set -e
-
+if [ ! -f /var/lib/mysql/ibdata1 ];then
+	mysqld --initialize-insecure --user=mysql
+fi
 MYSQL_ROOT_PWD=${MYSQL_ROOT_PWD:-"mysql"}
 MYSQL_USER=${MYSQL_USER:-""}
 MYSQL_USER_PWD=${MYSQL_USER_PWD:-""}
@@ -10,7 +12,7 @@ echo "[i] Setting up new power user credentials."
 service mysql start $ sleep 10
 
 echo "[i] Setting root new password."
-mysql --user=root --password=root -e "UPDATE mysql.user set authentication_string=password('$MYSQL_ROOT_PWD') where user='root'; FLUSH PRIVILEGES;"
+mysql --user=root -e "UPDATE mysql.user set authentication_string=password('$MYSQL_ROOT_PWD') where user='root'; FLUSH PRIVILEGES;"
 
 echo "[i] Setting root remote password."
 mysql --user=root --password=$MYSQL_ROOT_PWD -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '$MYSQL_ROOT_PWD' WITH GRANT OPTION; FLUSH PRIVILEGES;"
